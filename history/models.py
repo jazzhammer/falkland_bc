@@ -6,7 +6,9 @@ import string
 
 def randomId():
     alphabet = string.ascii_letters + string.digits
-    return ''.join(secrets.choice(alphabet) for i in range(128))
+    id = ''.join(secrets.choice(alphabet) for i in range(126))
+    print(f'id({len(id)}): {id}')
+    return id
 
 
 class InventoryItem(models.Model):
@@ -77,7 +79,7 @@ class Donor(models.Model):
     phone_area_code = models.CharField(max_length=3)
     phone_number = models.CharField(max_length=7)
     created_at = models.DateTimeField(auto_now=True)
-    user_key_create = models.CharField(max_length=128)
+    user_key_create = models.CharField(max_length=128, default=randomId())
 
     class Meta:
         abstract = True
@@ -90,4 +92,4 @@ class DonorPerson(Donor):
 class DonorOrganization(Donor):
     donor_organization_id = models.CharField(max_length=128, primary_key=True, default=randomId())
     name = models.CharField(max_length=128)
-    url = models.URLField()
+    url = models.URLField(default='')

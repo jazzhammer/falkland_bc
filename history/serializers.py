@@ -97,7 +97,7 @@ class DonorPersonSerializer(serializers.ModelSerializer):
 class CreateDonorPersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = DonorPerson
-        fields = (
+        fields = [
             'street',
             'city',
             'province_state',
@@ -106,4 +106,4 @@ class CreateDonorPersonSerializer(serializers.ModelSerializer):
             'phone_number',
             'last_name',
             'first_name'
-        )
+        ]

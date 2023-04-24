@@ -11,14 +11,13 @@ def main(request):
     return HttpResponse('main responses')
 
 class DonorPersonView(APIView):
-    serializer_class = CreateDonorPersonSerializer
     # TODO: the other rest operations
     def post(self, request, format=None):
         if not self.request.session.exists(self.request.session.session_key):
             self.request.session.create()
-        serializer = self.serializer_class(data=request.data)
+        serializer = CreateDonorPersonSerializer(data=request.data)
         if serializer.is_valid():
-            donorPerson = DonorPerson(serializer.data);
+            # donorPerson = DonorPerson(serializer);
             # donorPerson = DonorPerson(
             #     last_name=serializer.data.last_name,
             #     first_name=serializer.data.first_name,
@@ -29,8 +28,10 @@ class DonorPersonView(APIView):
             #     phone_area_code=serializer.data.phone_area_code,
             #     phone_number=serializer.data.phone_number
             # )
-            donorPerson.save()
-            return Response(DonorPersonSerializer(donorPerson).data, status=status.HTTP_201_CREATED)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response('could not create DonorPerson from information submitted', status=status.HTTP_400_BAD_REQUEST)
 
 class InventoryItemView(generics.CreateAPIView):
     queryset = InventoryItem.objects.all()
