@@ -5,8 +5,10 @@ from .models import *
 from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
-
+from history.serialize.donor import CreateDonorPersonSerializer
+from history.serialize.inventory import *
+from history.serialize.inventory_status import *
+from history.serialize.inventory_location import *
 def main(request):
     return HttpResponse('main responses')
 

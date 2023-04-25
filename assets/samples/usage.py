@@ -1,0 +1,1 @@
+# which the sign (Received date) then from there is gets entered into a log, assigned an accession number ( registered) and then supposed to be entered into a database with pictures of it. All 4 sides.  Museum work is very document heavy lol.
