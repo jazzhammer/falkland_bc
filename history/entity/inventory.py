@@ -1,6 +1,5 @@
 from history.util.model_utils import randomId
 from django.db.models import *
-from history.entity.country import Country
 
 class InventoryItem(Model):
     # identification workflow
@@ -11,12 +10,19 @@ class InventoryItem(Model):
     # description workflow
     name = CharField(max_length=255, unique=True, help_text='unique name, for conversational reference')
     description = TextField(help_text='a paragraph, eg. that would tell someone something interesting about the item')
+    part_of = TextField(help_text='')
+    disposable_terms = TextField(help_text='')
+    description_level = TextField(help_text='')
     biography = TextField(help_text='')
     url = URLField(null=True, help_text='if such exists, a url that we link to that provides more detail about the item')
 
     # accession workflow
     # is there a document that comes along with getting an accession id ?
     accession_id = CharField(max_length=32, unique=True, help_text='unique identifier, eg. ISBN')
+    gmd = TextField(help_text='')
+    gmd_start = DateTimeField(auto_now=False, null=True)
+    gmd_end = DateTimeField(auto_now=False, null=True)
+    date_range = TextField(help_text='')
 
     # donation workflow
     # all about the donor
@@ -40,20 +46,6 @@ class InventoryItem(Model):
     created_at = DateTimeField(auto_now=True)
     user_key_create = CharField(max_length=128, default=None)
 
+    #
 
-
-class InventoryImage(Model):
-    inventory_image_id = CharField(max_length=128, primary_key=True, default=randomId())
-    inventory_item_id = ForeignKey('InventoryItem', on_delete=SET_NULL, null=True)
-    user_key_create = CharField(max_length=128, default=None)
-    created_at = DateTimeField(auto_now=True)
-    image = ImageField(upload_to='images/inventory', default=None)
-
-
-class InventoryCategory(Model):
-    inventory_category_id = CharField(max_length=128, primary_key=True, default=randomId())
-    name = CharField(max_length=128, null=False)
-    user_key_create = CharField(max_length=128, default=None)
-    created_at = DateTimeField(auto_now=True)
-    image = ImageField(upload_to='images/inventory', default=None)
 
