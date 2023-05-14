@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from history.entity.donor import DonorPerson
-from history.entity.inventory import InventoryItem, InventoryImage
+from history.entity.inventory import InventoryItem
 from history.entity.inventory_location import InventoryLocation, InventoryLocationAssign
 from history.entity.inventory_status import InventoryStatus, InventoryStatusAssign
 import history.serialize.donor

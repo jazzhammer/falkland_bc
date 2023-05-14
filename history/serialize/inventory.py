@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from history.entity.inventory import InventoryItem
-from history.entity.inventory import InventoryImage
+from history.entity.inventory_image import InventoryImage
+
 
 class InventoryItemSerializer(ModelSerializer):
     class Meta:
