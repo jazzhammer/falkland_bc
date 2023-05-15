@@ -20,10 +20,10 @@ from .views import *
 
 urlpatterns = [
     path('', main),
-    path('inventory_items', InventoryItemView.as_view()),
+    path('inventory_item/', InventoryItemView.as_view()),
     path('inventory_status', InventoryStatusView.as_view()),
-    path('inventory_status_assigns', InventoryStatusAssignView.as_view()),
+    path('inventory_status_assign', InventoryStatusAssignView.as_view()),
     path('inventory_location', InventoryLocationView.as_view()),
-    path('inventory_location_assigns', InventoryLocationAssignView.as_view()),
+    path('inventory_location_assign', InventoryLocationAssignView.as_view()),
     path('donor_person', DonorPersonView.as_view())
 ]

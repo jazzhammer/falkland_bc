@@ -1,0 +1,16 @@
+gmd_options = (
+    'architectural drawing',
+    'cartographic material',
+    'graphic material',
+    'moving images',
+    'multiple media',
+    'object',
+    'philatelic record',
+    'sound recording',
+    'technical drawing',
+    'textual record',
+    'electronic',
+    'large print',
+    'microform',
+    'tactile',
+)

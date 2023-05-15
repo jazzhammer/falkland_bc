@@ -38,6 +38,14 @@ class DonorPersonView(APIView):
 class InventoryItemView(generics.CreateAPIView):
     queryset = InventoryItem.objects.all()
     serializer_class = InventoryItemSerializer
+    def post(self, request):
+        created = InventoryItemSerializer(data=request.data)
+        if created.is_valid():
+            created.save()
+            return Response(created.data, status=status.HTTP_200_OK)
+        else:
+            print(created.errors)
+            return Response('could not create DonorPerson from information submitted', status=status.HTTP_400_BAD_REQUEST)
 
 
 class InventoryImageView(generics.CreateAPIView):
