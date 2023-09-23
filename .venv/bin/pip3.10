@@ -1,4 +1,4 @@
-#!/Users/jazzhammer/Documents/workspace_2013/falkland_bc/.venv/bin/python3
+#!/Users/jazzhammer/Documents/workspace_2013/falkland_bc/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
