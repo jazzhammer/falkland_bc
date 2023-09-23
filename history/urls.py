@@ -17,10 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import *
-from .views import ProductDetailApiView
 
 urlpatterns = [
-    path('', ProductListCreateApiView.as_view()),
     path('donor_person', DonorPersonView.as_view()),
 
     # path('inventory_item/', InventoryItemView.as_view()),

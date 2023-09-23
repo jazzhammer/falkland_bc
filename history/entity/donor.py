@@ -6,7 +6,7 @@ class Donor(Model):
     street = CharField(max_length=128, help_text='street address')
     city = CharField(max_length=64)
     province_state = CharField(max_length=64, help_text='province/state/region')
-    country = CharField(max_length=32, default=Country.CAN)
+    country = CharField(max_length=32, default=Country.default_number)
     phone_area_code = CharField(max_length=3)
     phone_number = CharField(max_length=7)
     created_at = DateTimeField(auto_now=True)

@@ -7,25 +7,3 @@ from history.entity.inventory_status import InventoryStatus, InventoryStatusAssi
 import history.serialize.donor
 import history.serialize.inventory_location
 import history.serialize.inventory_status
-
-from .entity.product import Product
-
-
-class ProductSerializer(serializers.ModelSerializer):
-    discount = serializers.SerializerMethodField(read_only=True)
-
-    class Meta:
-        model = Product
-        fields = [
-            'title',
-            'content',
-            'price',
-            'sale_price',
-            'discount'
-        ]
-
-    def get_discount(self, obj):
-        try:
-            return obj.get_discount()
-        except:
-            return None

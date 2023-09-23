@@ -7,3 +7,5 @@ def randomId():
     print(f'id({len(id)}): {id}')
     return id
 
+def loadCountryCodes():
+    pass

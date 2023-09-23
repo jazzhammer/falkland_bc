@@ -1,4 +1,5 @@
 import io
+import time
 
 from django.db import Error
 from django.http import JsonResponse
@@ -8,8 +9,6 @@ import json
 from rest_framework.parsers import JSONParser
 
 from history.entity.donor import DonorPerson
-from history.entity.product import Product
-from history.serializers import ProductSerializer
 from history.util.model_utils import randomId
 from django.core import serializers
 from django.db.models import Q
@@ -27,39 +26,10 @@ from rest_framework import generics
 from django.core.exceptions import ObjectDoesNotExist
 
 
-class ProductListCreateApiView(generics.ListCreateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer()
-
-    def perform_create(self, serializer):
-        # serializer.save(user=self.request.user)
-        # print(serializer.validated_data)
-        # title = serializer.validated_data('title')
-        # content = serializer.validated_data('content')
-        serializer.save()
-
-
-class ProductDetailApiView(generics.RetrieveAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer()
-
 
 @api_view(["GET", "POST"])
 def main(request, *args, **kwargs):
-    if request.method == 'GET':
-        instance = Product.objects.all().order_by("?").first()
-        data = None
-        if instance:
-            data = ProductSerializer(instance).data
-        return Response(data)
-    if request.method == 'POST':
-
-        serializer = ProductSerializer(data=request.data)
-        if serializer.is_valid():
-            instance = serializer.save()
-            print(serializer.data)
-        return Response(serializer.data)
-
+    pass
 
 def test(request, *args, **kwargs):
     print(request.content_type)
@@ -83,8 +53,10 @@ def test(request, *args, **kwargs):
 
 
 class DonorPersonView(APIView):
-    # TODO: the other rest operations
     def post(self, request, format=None):
+        print(f"DonorPersonView(APIView):post(self, request, format=None):----------------------------------------")
+        print(f"@ {time.time()}")
+        print(f"--------------------------------------------------------------------------------------------------")
         body = request.body
         if not self.request.session.exists(self.request.session.session_key):
             self.request.session.create()
@@ -97,21 +69,22 @@ class DonorPersonView(APIView):
             serializer = CreateDonorPersonSerializer(data=new_donor)
             if serializer.is_valid():
                 print(f"saving DonorPerson with {serializer.validated_data}")
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+                # serializer.save()
+                DonorPerson.objects.create(**serializer.validated_data)
+                return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
             else:
                 return Response('could not create DonorPerson from information submitted',
                                 status=status.HTTP_400_BAD_REQUEST
                 )
-        else:
-            # is an organization
-            serializer = CreateDonorOrganizationSerializer(data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            else:
-                return Response('could not create DonorOrganization from information submitted',
-                                status=status.HTTP_400_BAD_REQUEST)
+        # else:
+        #     # is an organization
+        #     serializer = CreateDonorOrganizationSerializer(data=request.data)
+        #     if serializer.is_valid():
+        #         serializer.save()
+        #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+        #     else:
+        #         return Response('could not create DonorOrganization from information submitted',
+        #                         status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request):
         if not self.request.session.exists(self.request.session.session_key):

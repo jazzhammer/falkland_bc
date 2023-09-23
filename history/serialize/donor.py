@@ -29,10 +29,13 @@ class CreateDonorPersonSerializer(serializers.ModelSerializer):
             'phone_number',
             'donor_person_id',
             'last_name',
-            'first_name'
+            'first_name',
+            'street',
+            'city',
+            'province_state'
         ]
-        def create(self, validated_data):
-            return DonorPerson.objects.create(**validated_data)
+        # def create(self, validated_data):
+        #     return DonorPerson.objects.create(**validated_data)
 
 
 class CreateDonorOrganizationSerializer(serializers.ModelSerializer):
