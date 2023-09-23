@@ -7,4 +7,5 @@ from history.entity import inventory_note
 from history.entity import inventory_status
 from history.entity import manufacturer
 from history.entity import owner
+from history.entity import product
 

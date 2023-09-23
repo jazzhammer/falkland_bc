@@ -10,9 +10,10 @@ class InventoryItem(Model):
 
     '''
     # identification workflow
-    # just the id is required for creation
+    # just the id, name are required for creation
     # because the process of fully describing an inventory item is
     # disjoint, could take far more time than what would be required to fill out even a long form
+    name = CharField(max_length=128)
     inventory_item_id = CharField(max_length=128, primary_key=True, default=randomId())
     inventory_status_id = ForeignKey('InventoryStatus', on_delete=SET_NULL, null=True)
 

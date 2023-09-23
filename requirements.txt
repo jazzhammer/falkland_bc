@@ -1,0 +1,12 @@
+asgiref
+django-cors-headers
+django
+djangorestframework
+isbnlib
+Pillow
+pytz
+setuptools
+sqlparse
+psycopg2-binary
+
+

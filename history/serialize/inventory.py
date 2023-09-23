@@ -7,6 +7,7 @@ class InventoryItemSerializer(ModelSerializer):
     class Meta:
         model = InventoryItem
         fields = (
+            'name',
             'inventory_item_id',
             'inventory_status_id',
             'created_at',
